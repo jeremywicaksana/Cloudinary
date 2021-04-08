@@ -1,0 +1,36 @@
+<html>
+	<body>
+		<form action = "/login" method = "POST">
+			username: <input type="text" name="username" id="uname" ><br>
+      <button type = "submit" class = "login"  onclick="set_user_cookie()">Enter</button>
+		</form>
+    <div> {{ error }}</div>
+	</body>
+
+
+<script src = "https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type = "text/javascript">
+window.onload = () => {
+  localStorage.clear()
+}
+
+function set_user_cookie(){
+  nm = document.getElementById("uname").value 
+  localStorage.setItem("uname", nm)
+  var server = "http://localhost:5000"
+  var dir = "/unameRecv"
+  var name = {"uname": nm}
+  $.ajax({
+    type: "POST",
+    url : server+dir,
+    data: JSON.stringify(name),
+    dataType: 'json'
+  })
+  .done(function(data){
+    localStorage.setItem("id", data.id)
+  });
+}
+
+
+</script>
+</html>

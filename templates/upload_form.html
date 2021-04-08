@@ -1,32 +1,56 @@
 <!doctype html>
+<div id = "name"></div>
 <title>Upload new Image</title>
 <h1>Upload new Image</h1>
-<form action="/" method="post" enctype="multipart/form-data">
-  <p><input type="file" name="file" multiple>
-     <input type="submit" value="Upload">
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <p><input type="file" name="file">
+    <input type="hidden" name="user" value="" id="user">
+    <input type="hidden" name="ident" value="" id="ident">
+    <input type="submit" value="Upload">
 </form>
 
 <form action="/delete" method="post" enctype="multipart/form-data">
   <button type="submit">delete file</button>
 </form>
 
-{% if condition %}
-<div><a href="{{ publicID }}"> id left: {{ publicID }}</a></div>
-<div><a href="{{condition}}">{{condition}}</a></div>
+{% if public_ids %}
+<h3>Current public ID</h3>
+<div>{{ public_ids }}</div>
 {% endif %}
-
 
 {% if upload_result %}
-  <h3>Upload API Result</h3>
-  <!-- <div>{{ upload_result }}</div> -->
-  <!-- <h3>Thumbnails:</h3> -->
-  <!-- <div><a href="{{thumbnail_url1}}">{{thumbnail_url1}}</a></div> -->
-  <!-- <img src="{{ thumbnail_url1 }}"/> -->
-  <!-- <div><a href="{{thumbnail_url2}}">{{thumbnail_url2}}</a></div> -->
-  <!-- <img src="{{ thumbnail_url2 }}"/> -->
-
-  <div><a href="{{ publicID }}"> id left: {{ publicID }}</a></div>
-  <h3>Original:</h3>
-  <img src="{{ upload_result['url'] }}"/>
+<h3>Upload API Result</h3>
+<div>{{ upload_result }}</div>
+<h3>Thumbnails:</h3>
+<img src="{{ thumbnail_url1 }}"/>
+<img src="{{ thumbnail_url2 }}"/>
+<h3>Original:</h3>
+<img src="{{ upload_result['url'] }}"/>
+  
 {% endif %}
 
+{% if condition %}
+<div> id left: {{ publicID }}</a></div>
+<div> condition: {{condition}}</a></div>
+
+
+
+
+{% endif %}
+
+
+<script type ="text/javascript">
+window.onload = () => {
+  var usr = localStorage.getItem("uname")
+  var id = localStorage.getItem("id")
+  document.getElementById("name").innerHTML = "Welcome " + usr;
+  document.getElementById("user").value = usr;
+  document.getElementById("ident").value = id;
+}
+
+
+
+
+
+
+</script>
