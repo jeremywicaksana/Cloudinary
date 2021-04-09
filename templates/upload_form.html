@@ -3,15 +3,28 @@
 <title>Upload new Image</title>
 <h1>Upload new Image</h1>
 <form action="/upload" method="post" enctype="multipart/form-data">
-  <p><input type="file" name="file">
+  <p><input type="file" name="file"><br>
     <input type="hidden" name="user" value="" id="user">
     <input type="hidden" name="ident" value="" id="ident">
+    <p>tag name: <input type="text" name="tag">
     <input type="submit" value="Upload">
 </form>
 
+<form action="/search" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="ident" value="" id="ident">
+  tag search: <input type="text" name="tag">
+  <input type="submit" value="search">
+</form>
+
 <form action="/delete" method="post" enctype="multipart/form-data">
+  <p><input type="hidden" name="ident" value="" id="ident">
   <button type="submit">delete file</button>
 </form>
+
+{% if search_res %}
+<div>{{ search_res }}</div>
+<img src="{{ search_res['secure_url'] }}"/>
+{% endif %}
 
 {% if public_ids %}
 <h3>Current public ID</h3>

@@ -28,7 +28,9 @@ function set_user_cookie(){
   })
   .done(function(data){
     localStorage.setItem("id", data.id)
+    localStorage.setItem("public_ids", data.public_ids)    
   });
+
 }
 
 
